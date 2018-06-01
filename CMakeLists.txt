@@ -24,3 +24,11 @@ target_link_libraries (removerPuntosCondicion ${PCL_LIBRARIES})
 
 add_executable (filtroPaso ./src/filtros/filtroDePaso.cpp)
 target_link_libraries (filtroPaso ${PCL_LIBRARIES})
+
+#propiedades
+add_executable (EstimacionNormales ./src/propiedades/EstimationNormal.cpp)
+target_link_libraries (EstimacionNormales ${PCL_LIBRARIES})
+
+add_executable (ExtraerIndices ./src/propiedades/extraerIndices.cpp)
+target_link_libraries (ExtraerIndices ${PCL_LIBRARIES})
+
