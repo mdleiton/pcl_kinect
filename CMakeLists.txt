@@ -12,3 +12,15 @@ add_definitions(${PCL_DEFINITIONS})
 add_executable (pcd_lectura ./src/io/lectura_nube_puntos.cpp)
 target_link_libraries (pcd_lectura ${PCL_LIBRARIES})
 
+#filtros
+add_executable (removerNAN ./src/filtros/removerNAN.cpp)
+target_link_libraries (removerNAN ${PCL_LIBRARIES})
+
+add_executable (removerPARadio ./src/filtros/removerPuntosAisladosRadio.cpp)
+target_link_libraries (removerPARadio ${PCL_LIBRARIES})
+
+add_executable (removerPuntosCondicion ./src/filtros/FiltrosCondicionales.cpp)
+target_link_libraries (removerPuntosCondicion ${PCL_LIBRARIES})
+
+add_executable (filtroPaso ./src/filtros/filtroDePaso.cpp)
+target_link_libraries (filtroPaso ${PCL_LIBRARIES})
