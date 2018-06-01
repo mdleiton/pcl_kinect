@@ -26,9 +26,22 @@ add_executable (filtroPaso ./src/filtros/filtroDePaso.cpp)
 target_link_libraries (filtroPaso ${PCL_LIBRARIES})
 
 #propiedades
-add_executable (EstimacionNormales ./src/propiedades/EstimationNormal.cpp)
+add_executable (EstimacionNormales ./src/propiedades/EstimacionDeNormal.cpp)
 target_link_libraries (EstimacionNormales ${PCL_LIBRARIES})
 
 add_executable (ExtraerIndices ./src/propiedades/extraerIndices.cpp)
 target_link_libraries (ExtraerIndices ${PCL_LIBRARIES})
 
+
+#segmentacion
+add_executable (SegmentacionPlanos ./src/segmentacion/PlaneModelSegmentation.cpp)
+target_link_libraries (SegmentacionPlanos ${PCL_LIBRARIES})
+
+add_executable (SegmentacionEuclidiana ./src/segmentacion/EuclideanSegmentation.cpp)
+target_link_libraries (SegmentacionEuclidiana ${PCL_LIBRARIES})
+
+add_executable (SegmentacionCondicionadaEuclidiana ./src/segmentacion/ConditionalEuclideanSegmentation.cpp)
+target_link_libraries (SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES})
+
+add_executable (reconstruccion ./src/reconstruccion.cpp)
+target_link_libraries (reconstruccion ${PCL_LIBRARIES})
