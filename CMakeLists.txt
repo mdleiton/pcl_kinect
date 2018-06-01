@@ -9,42 +9,39 @@ link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 # entrada/salida
-add_executable (pcd_lectura ./src/io/lectura_nube_puntos.cpp)
-target_link_libraries (pcd_lectura ${PCL_LIBRARIES})
+add_executable (../bin/pcd_lectura ./src/io/lectura_nube_puntos.cpp)
+target_link_libraries (../bin/pcd_lectura ${PCL_LIBRARIES})
 
 #filtros
-add_executable (removerNAN ./src/filtros/removerNAN.cpp)
-target_link_libraries (removerNAN ${PCL_LIBRARIES})
+add_executable (../bin/removerNAN ./src/filtros/removerNAN.cpp)
+target_link_libraries (../bin/removerNAN ${PCL_LIBRARIES})
 
-add_executable (removerPARadio ./src/filtros/removerPuntosAisladosRadio.cpp)
-target_link_libraries (removerPARadio ${PCL_LIBRARIES})
+add_executable (../bin/removerPARadio ./src/filtros/removerPuntosAisladosRadio.cpp)
+target_link_libraries (../bin/removerPARadio ${PCL_LIBRARIES})
 
-add_executable (removerPuntosCondicion ./src/filtros/FiltrosCondicionales.cpp)
-target_link_libraries (removerPuntosCondicion ${PCL_LIBRARIES})
+add_executable (../bin/removerPuntosCondicion ./src/filtros/FiltrosCondicionales.cpp)
+target_link_libraries (../bin/removerPuntosCondicion ${PCL_LIBRARIES})
 
-add_executable (filtroPaso ./src/filtros/filtroDePaso.cpp)
-target_link_libraries (filtroPaso ${PCL_LIBRARIES})
+add_executable (../bin/filtroPaso ./src/filtros/filtroDePaso.cpp)
+target_link_libraries (../bin/filtroPaso ${PCL_LIBRARIES})
 
 #propiedades
-add_executable (EstimacionNormales ./src/propiedades/EstimacionDeNormal.cpp)
-target_link_libraries (EstimacionNormales ${PCL_LIBRARIES})
+add_executable (../bin/EstimacionNormales ./src/propiedades/EstimacionDeNormal.cpp)
+target_link_libraries (../bin/EstimacionNormales ${PCL_LIBRARIES})
 
-add_executable (ExtraerIndices ./src/propiedades/extraerIndices.cpp)
-target_link_libraries (ExtraerIndices ${PCL_LIBRARIES})
+add_executable (../bin/ExtraerIndices ./src/propiedades/extraerIndices.cpp)
+target_link_libraries (../bin/ExtraerIndices ${PCL_LIBRARIES})
 
 
 #segmentacion
-add_executable (SegmentacionPlanos ./src/segmentacion/PlaneModelSegmentation.cpp)
-target_link_libraries (SegmentacionPlanos ${PCL_LIBRARIES})
+add_executable (../bin/SegmentacionPlanos ./src/segmentacion/PlaneModelSegmentation.cpp)
+target_link_libraries (../bin/SegmentacionPlanos ${PCL_LIBRARIES})
 
-add_executable (SegmentacionEuclidiana ./src/segmentacion/EuclideanSegmentation.cpp)
-target_link_libraries (SegmentacionEuclidiana ${PCL_LIBRARIES})
+add_executable (../bin/SegmentacionEuclidiana ./src/segmentacion/EuclideanSegmentation.cpp)
+target_link_libraries (../bin/SegmentacionEuclidiana ${PCL_LIBRARIES})
 
-add_executable (SegmentacionCondicionadaEuclidiana ./src/segmentacion/ConditionalEuclideanSegmentation.cpp)
-target_link_libraries (SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES})
+add_executable (../bin/SegmentacionCondicionadaEuclidiana ./src/segmentacion/ConditionalEuclideanSegmentation.cpp)
+target_link_libraries (../bin/SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES})
 
-add_executable (reconstruccion ./src/reconstruccion.cpp)
-target_link_libraries (reconstruccion ${PCL_LIBRARIES})
-
-add_executable (triangulation ./src/triangulation.cpp)
-target_link_libraries (triangulation ${PCL_LIBRARIES})
+add_executable (../bin/triangulation ./src/triangulation.cpp)
+target_link_libraries (../bin/triangulation ${PCL_LIBRARIES})
