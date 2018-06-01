@@ -45,3 +45,6 @@ target_link_libraries (SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES})
 
 add_executable (reconstruccion ./src/reconstruccion.cpp)
 target_link_libraries (reconstruccion ${PCL_LIBRARIES})
+
+add_executable (triangulation ./src/triangulation.cpp)
+target_link_libraries (triangulation ${PCL_LIBRARIES})
