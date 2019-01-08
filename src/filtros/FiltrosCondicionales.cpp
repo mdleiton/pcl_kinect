@@ -2,25 +2,31 @@
 #include <pcl/filters/conditional_removal.h>
 
 int main(int argc, char** argv){
-	pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
-	pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr filteredCloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr filteredCloud(new pcl::PointCloud<pcl::PointXYZRGB>);
 
-	if (pcl::io::loadPCDFile<pcl::PointXYZRGBNormal>(argv[1], *cloud) != 0){
+	if (pcl::io::loadPCDFile<pcl::PointXYZRGB>(argv[1], *cloud) != 0){
 		return -1;
 	}
 	// ConditionAnd , ConditionOr
 	//disponibles: GT, GE, LT, LE, EQ.
-	pcl::ConditionAnd<pcl::PointXYZRGBNormal>::Ptr condition(new pcl::ConditionAnd<pcl::PointXYZRGBNormal>);
-	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGBNormal>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGBNormal>("z", pcl::ComparisonOps::GT, 0.0))); //valores de puntos en el eje z mayores a cero  
-	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGBNormal>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGBNormal>("z", pcl::ComparisonOps::LT, 2.0))); //valores de puntos en el eje z menores a 2.0 
+	pcl::ConditionAnd<pcl::PointXYZRGB>::Ptr condition(new pcl::ConditionAnd<pcl::PointXYZRGB>);
+	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGB>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGB>("z", pcl::ComparisonOps::GT, 0.0))); //valores de puntos en el eje z mayores a cero  
+	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGB>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGB>("z", pcl::ComparisonOps::LT, 1.0))); //valores de puntos en el eje z menores a 2.0 
 	
-	pcl::ConditionalRemoval<pcl::PointXYZRGBNormal> filter;
+	pcl::ConditionalRemoval<pcl::PointXYZRGB> filter;
 	filter.setCondition(condition);
 	filter.setInputCloud(cloud);
-	//si un punto no cumple la condición será removido.
-	filter.setKeepOrganized(true);
-	filter.setUserFilterValue(0.0);
+	filter.setKeepOrganized(true);  
 
-	filter.filter(*filteredCloud);
+	filter.filter(*filteredCloud); 	//si un punto no cumple la condición por defecto sus coordenadas XYZ se setean a nan nan nan.
+	// estos valores no se visualizaran, pero se mantienen en el archivo ocupando espacio.	
+	//filter.setUserFilterValue(0.0); // esto setea los valores que no cumplen la(s) condicion(es) a cero.
+
+	// se deben remover los nan para eliminar dichos puntos del archivo.
+	std::vector<int> mapping;
+	pcl::removeNaNFromPointCloud(*filteredCloud, *filteredCloud, mapping);
+
+
 	pcl::io::savePCDFileASCII(argv[2], *filteredCloud);
 }
