@@ -1,0 +1,3 @@
+[submodule "kinect2"]
+	path = kinect2
+	url = https://github.com/mdleiton/kinect2.git
