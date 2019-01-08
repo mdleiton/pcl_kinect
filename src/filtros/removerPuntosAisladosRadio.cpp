@@ -6,18 +6,21 @@ it is removed. */
 #include <pcl/filters/radius_outlier_removal.h>
 
 int main(int argc, char** argv){
-	pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
-	pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr filteredCloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr filteredCloud(new pcl::PointCloud<pcl::PointXYZRGB>);
 
-	if (pcl::io::loadPCDFile<pcl::PointXYZRGBNormal>(argv[1], *cloud) != 0){
+	if (pcl::io::loadPCDFile<pcl::PointXYZRGB>(argv[1], *cloud) != 0){
 		return -1;
 	}
+	// remover nan
+	std::vector<int> mapping;
+	pcl::removeNaNFromPointCloud(*cloud, *cloud, mapping);
 
-	pcl::RadiusOutlierRemoval<pcl::PointXYZRGBNormal> filter;
+	pcl::RadiusOutlierRemoval<pcl::PointXYZRGB> filter;
 	filter.setInputCloud(cloud);
 	// 
 	filter.setRadiusSearch(0.15); //Every point must have 10 neighbors within 15cm, or it will be removed.
-	filter.setMinNeighborsInRadius(10);
+	filter.setMinNeighborsInRadius(3000);
 
 	filter.filter(*filteredCloud);
 	pcl::io::savePCDFileASCII(argv[2], *filteredCloud);

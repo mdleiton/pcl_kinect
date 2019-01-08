@@ -45,3 +45,4 @@ target_link_libraries (../bin/SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES
 
 add_executable (../bin/triangulation ./src/triangulation.cpp)
 target_link_libraries (../bin/triangulation ${PCL_LIBRARIES})
+

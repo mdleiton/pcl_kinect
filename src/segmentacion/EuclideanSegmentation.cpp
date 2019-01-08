@@ -4,24 +4,29 @@ Then, it spreads like a virus to all other points that are near enough, and from
 Then, a new cluster is initialized, and the procedure starts again with the remaining unmarked points. */
 #include <pcl/io/pcd_io.h>
 #include <pcl/segmentation/extract_clusters.h>
+#include <pcl/filters/radius_outlier_removal.h>
 
 #include <iostream>
 
 int main(int argc, char** argv){
-	pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
 
-	if (pcl::io::loadPCDFile<pcl::PointXYZRGBNormal>(argv[1], *cloud) != 0){
+	if (pcl::io::loadPCDFile<pcl::PointXYZRGB>(argv[1], *cloud) != 0){
 		return -1;
 	}
 
-	pcl::search::KdTree<pcl::PointXYZRGBNormal>::Ptr kdtree(new pcl::search::KdTree<pcl::PointXYZRGBNormal>);
+	// remover nan
+	std::vector<int> mapping;
+	pcl::removeNaNFromPointCloud(*cloud, *cloud, mapping);
+
+	pcl::search::KdTree<pcl::PointXYZRGB>::Ptr kdtree(new pcl::search::KdTree<pcl::PointXYZRGB>);
 	kdtree->setInputCloud(cloud);
 
-	pcl::EuclideanClusterExtraction<pcl::PointXYZRGBNormal> clustering;
+	pcl::EuclideanClusterExtraction<pcl::PointXYZRGB> clustering;
 	// Set cluster tolerance to 2cm (small values may cause objects to be divided in several clusters, whereas big values may join objects in a same cluster).
 	clustering.setClusterTolerance(0.09);
 	
-	clustering.setMinClusterSize(200); // minima cantidad de puntos en un cluster
+	clustering.setMinClusterSize(1000); // minima cantidad de puntos en un cluster
 	clustering.setMaxClusterSize(25000); // máxima cantidad de puntos en un cluster
 	clustering.setSearchMethod(kdtree);
 	clustering.setInputCloud(cloud);
@@ -31,7 +36,7 @@ int main(int argc, char** argv){
 	// itera a traves de cada punta a traves de cada cluster.
 	int currentClusterNum = 1;
 	for (std::vector<pcl::PointIndices>::const_iterator i = clusters.begin(); i != clusters.end(); ++i){
-		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cluster(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr cluster(new pcl::PointCloud<pcl::PointXYZRGB>);
 		for (std::vector<int>::const_iterator point = i->indices.begin(); point != i->indices.end(); point++)
 			cluster->points.push_back(cloud->points[*point]);
 		cluster->width = cluster->points.size();

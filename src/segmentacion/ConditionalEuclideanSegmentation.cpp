@@ -3,20 +3,20 @@
 #include <iostream>
 
 // If this function returns true, the candidate point will be added to the cluster of the seed point.
-bool customCondition(const pcl::PointXYZRGBNormal& seedPoint, const pcl::PointXYZRGBNormal& candidatePoint, float squaredDistance){
+bool customCondition(const pcl::PointXYZRGB& seedPoint, const pcl::PointXYZRGB& candidatePoint, float squaredDistance){
 	// modificar a conveniencia
 	if (candidatePoint.y < seedPoint.y) return false;
 	return true;
 }
 
 int main(int argc, char** argv){
-	pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
 
-	if (pcl::io::loadPCDFile<pcl::PointXYZRGBNormal>(argv[1], *cloud) != 0){
+	if (pcl::io::loadPCDFile<pcl::PointXYZRGB>(argv[1], *cloud) != 0){
 		return -1;
 	}
 
-	pcl::ConditionalEuclideanClustering<pcl::PointXYZRGBNormal> clustering;
+	pcl::ConditionalEuclideanClustering<pcl::PointXYZRGB> clustering;
 	clustering.setClusterTolerance(0.09);
 	clustering.setMinClusterSize(200);
 	clustering.setMaxClusterSize(25000);
@@ -29,7 +29,7 @@ int main(int argc, char** argv){
 	// itera a traves de cada punta a traves de cada cluster.
 	int currentClusterNum = 1;
 	for (std::vector<pcl::PointIndices>::const_iterator i = clusters.begin(); i != clusters.end(); ++i){
-		pcl::PointCloud<pcl::PointXYZRGBNormal>::Ptr cluster(new pcl::PointCloud<pcl::PointXYZRGBNormal>);
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr cluster(new pcl::PointCloud<pcl::PointXYZRGB>);
 		for (std::vector<int>::const_iterator point = i->indices.begin(); point != i->indices.end(); point++)
 			cluster->points.push_back(cloud->points[*point]);
 		cluster->width = cluster->points.size();
