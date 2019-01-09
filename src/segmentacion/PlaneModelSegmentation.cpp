@@ -22,7 +22,7 @@ int main (int argc, char** argv){
   
   seg.setOptimizeCoefficients (true); // Opcional
 
-  seg.setModelType (pcl::SACMODEL_CYLINDER);
+  seg.setModelType (pcl::SACMODEL_PLANE);
   seg.setMethodType (pcl::SAC_RANSAC);
   seg.setDistanceThreshold (0.5);
 
