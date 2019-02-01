@@ -15,6 +15,10 @@ int main (int argc, char** argv){
     return -1;
   }
 
+  // remover nan
+  std::vector<int> mapping;
+  pcl::removeNaNFromPointCloud(*cloud, *cloud, mapping);
+
   pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
   pcl::PointIndices::Ptr inliers (new pcl::PointIndices);
  
@@ -22,9 +26,9 @@ int main (int argc, char** argv){
   
   seg.setOptimizeCoefficients (true); // Opcional
 
-  seg.setModelType (pcl::SACMODEL_CYLINDER);
+  seg.setModelType (pcl::SACMODEL_PLANE);
   seg.setMethodType (pcl::SAC_RANSAC);
-  seg.setDistanceThreshold (0.5);
+  seg.setDistanceThreshold (0.01);
 
   seg.setInputCloud (cloud);
   seg.segment (*inliers, *coefficients);
@@ -55,6 +59,7 @@ int main (int argc, char** argv){
   cloudPlane.height =1;
   cloudPlane.is_dense = false;
   cloudPlane.points.resize (cloudPlane.width * cloudPlane.height);
+
   pcl::io::savePCDFileASCII (argv[2], cloudPlane);
   return (0);
 }

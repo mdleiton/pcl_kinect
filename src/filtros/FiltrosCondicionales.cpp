@@ -11,8 +11,8 @@ int main(int argc, char** argv){
 	// ConditionAnd , ConditionOr
 	//disponibles: GT, GE, LT, LE, EQ.
 	pcl::ConditionAnd<pcl::PointXYZRGB>::Ptr condition(new pcl::ConditionAnd<pcl::PointXYZRGB>);
-	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGB>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGB>("z", pcl::ComparisonOps::GT, 0.0))); //valores de puntos en el eje z mayores a cero  
-	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGB>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGB>("z", pcl::ComparisonOps::LT, 1.0))); //valores de puntos en el eje z menores a 2.0 
+	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGB>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGB>("x", pcl::ComparisonOps::LT, 1.1))); //valores de puntos en el eje z mayores a cero  
+	condition->addComparison(pcl::FieldComparison<pcl::PointXYZRGB>::ConstPtr(new pcl::FieldComparison<pcl::PointXYZRGB>("z", pcl::ComparisonOps::LT, 1.5))); //valores de puntos en el eje z menores a 2.0 
 	
 	pcl::ConditionalRemoval<pcl::PointXYZRGB> filter;
 	filter.setCondition(condition);
