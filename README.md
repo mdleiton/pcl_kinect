@@ -11,7 +11,7 @@ Agregar submódulo kinect2 - Captura de imágenes y nubes de puntos con el dispo
 Actualizar submódulos
 ---------------------
 
-	git submodule update
+	git submodule update --init --recursive
 
 
 Compilar
