@@ -2,3 +2,14 @@ build/
 pcds/
 resultados/
 bin/
+
+### binarios ####
+
+bin/EstimacionNormales
+bin/ExtraerIndices
+bin/SegmentacionCondicionadaEuclidiana
+bin/SegmentacionEuclidiana
+bin/filtroPaso
+bin/pcd_lectura
+bin/removerNAN
+bin/removerPARadio

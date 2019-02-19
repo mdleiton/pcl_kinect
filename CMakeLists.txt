@@ -46,6 +46,9 @@ target_link_libraries (../bin/SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES
 #add_executable (../bin/triangulation ./src/triangulation.cpp)
 #target_link_libraries (../bin/triangulation ${PCL_LIBRARIES})
 
+add_executable (../bin/diference ./src/segmentacion/diference.cpp)
+target_link_libraries (../bin/diference ${PCL_LIBRARIES})
+
 #procesamiento
 add_executable (../build/procesamiento ./src/procesamiento.cpp)
 target_link_libraries (../build/procesamiento ${PCL_LIBRARIES})
