@@ -49,6 +49,12 @@ target_link_libraries (../bin/SegmentacionCondicionadaEuclidiana ${PCL_LIBRARIES
 add_executable (../bin/diference ./src/segmentacion/diference.cpp)
 target_link_libraries (../bin/diference ${PCL_LIBRARIES})
 
+add_executable (../bin/ransac ./src/segmentacion/ransac.cpp)
+target_link_libraries (../bin/ransac ${PCL_LIBRARIES})
+
+add_executable (../bin/cilindro ./src/segmentacion/cilindro.cpp)
+target_link_libraries (../bin/cilindro ${PCL_LIBRARIES})
+
 add_executable (../bin/color ./src/segmentacion/color.cpp)
 target_link_libraries (../bin/color ${PCL_LIBRARIES})
 
