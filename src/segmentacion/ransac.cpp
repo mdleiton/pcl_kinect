@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 	// Copy all inliers of the model to another cloud(inlierPoints ).
 	pcl::copyPointCloud<pcl::PointXYZ>(*cloud, inlierIndices, *inlierPoints);
 
-	pcl::io::savePCDFileASCII(argb[2], *inlierPoints);
+	pcl::io::savePCDFileASCII(argv[2], *inlierPoints);
 }
 
 /*
